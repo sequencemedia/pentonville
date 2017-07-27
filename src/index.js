@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 const SELECTOR = `
 /*
@@ -52,7 +53,6 @@ const isLast = (node, nodeList) => (
 )
 
 export default class Pentonville extends Component {
-
   getPentonville () { return this.refs.pentonville }
 
   queryForNodeList () {
@@ -73,10 +73,11 @@ export default class Pentonville extends Component {
     if (isKeyTab(key)) {
       const { target } = event
       const nodeList = this.getNodeListArray()
+
       if (isLast(target, nodeList)) {
         event.preventDefault()
         event.stopPropagation()
-        return getFirst(nodeList).focus()
+        getFirst(nodeList).focus()
       }
     }
   }
@@ -87,10 +88,11 @@ export default class Pentonville extends Component {
     if (isKeyTab(key)) {
       const { target } = event
       const nodeList = this.getNodeListArray()
+
       if (isLast(target, nodeList)) {
         event.preventDefault()
         event.stopPropagation()
-        return // true
+        return
       }
     }
   }
@@ -104,12 +106,13 @@ export default class Pentonville extends Component {
 
     if (!nodeList.includes(target)) {
       event.stopPropagation()
-      return getFirst(nodeList).focus()
+      getFirst(nodeList).focus()
     } else {
       const pentonville = this.getPentonville()
+
       if (!pentonville.contains(relatedTarget)) {
         event.stopPropagation()
-        return getFirst(nodeList).focus()
+        getFirst(nodeList).focus()
       }
     }
   }
@@ -123,12 +126,13 @@ export default class Pentonville extends Component {
 
     if (!nodeList.includes(target)) {
       event.stopPropagation()
-      return getFirst(nodeList).focus()
+      getFirst(nodeList).focus()
     } else {
       const pentonville = this.getPentonville()
+
       if (!pentonville.contains(relatedTarget)) {
         event.stopPropagation()
-        return getFirst(nodeList).focus()
+        getFirst(nodeList).focus()
       }
     }
   }
@@ -148,4 +152,8 @@ export default class Pentonville extends Component {
       </div>
     )
   }
+}
+
+Pentonville.propTypes = {
+  children: PropTypes.element.isRequired
 }
