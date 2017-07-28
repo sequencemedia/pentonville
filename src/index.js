@@ -41,14 +41,15 @@ const sortByTabIndex = (current, sibling) => { // current, sibling
   return isNaN(currentIndex) ? isNaN(siblingIndex) ? NEUTRAL : POSITIVE : isNaN(siblingIndex) ? NEGATIVE : currentIndex - siblingIndex
 }
 
-const getFirst = ([ first ]) => first
-const getLast = ([ ...all ]) => all.pop()
+const getAlpha = ([ alpha ]) => alpha
+const getOmega = ([ ...nodeList ]) => nodeList.pop()
 
-const isFirst = (node, nodeList) => (
-  node === getFirst(nodeList)
+const isAlpha = (node, nodeList) => (
+  node === getAlpha(nodeList)
 )
-const isLast = (node, nodeList) => (
-  node === getLast(nodeList)
+
+const isOmega = (node, nodeList) => (
+  node === getOmega(nodeList)
 )
 
 export default class Pentonville extends Component {
@@ -66,15 +67,20 @@ export default class Pentonville extends Component {
       .sort(sortByTabIndex)
   }
 
+  retainFocus ([ node ]) {
+    (node || this.getPentonville())
+      .focus()
+  }
+
   onKeyDown = (event) => {
     if (isKeyTab(event)) {
       const { target } = event
       const nodeList = this.getNodeListArray()
 
-      if (isLast(target, nodeList)) {
+      if (isOmega(target, nodeList)) {
         event.preventDefault()
         event.stopPropagation()
-        getFirst(nodeList).focus()
+        retainFocus(nodeList)
       }
     }
   }
@@ -84,7 +90,7 @@ export default class Pentonville extends Component {
       const { target } = event
       const nodeList = this.getNodeListArray()
 
-      if (isLast(target, nodeList)) {
+      if (isOmega(target, nodeList)) {
         event.preventDefault()
         event.stopPropagation()
         return
@@ -100,7 +106,7 @@ export default class Pentonville extends Component {
 
     if (!nodeList.includes(target)) {
       event.stopPropagation()
-      getFirst(nodeList).focus()
+      retainFocus(nodeList)
     } else {
       const pentonville = this.getPentonville()
       const {
@@ -109,7 +115,7 @@ export default class Pentonville extends Component {
 
       if (!pentonville.contains(relatedTarget)) {
         event.stopPropagation()
-        getFirst(nodeList).focus()
+        retainFocus(nodeList)
       }
     }
   }
@@ -122,7 +128,7 @@ export default class Pentonville extends Component {
 
     if (!nodeList.includes(target)) {
       event.stopPropagation()
-      getFirst(nodeList).focus()
+      retainFocus(nodeList)
     } else {
       const pentonville = this.getPentonville()
       const {
@@ -131,7 +137,7 @@ export default class Pentonville extends Component {
 
       if (!pentonville.contains(relatedTarget)) {
         event.stopPropagation()
-        getFirst(nodeList).focus()
+        retainFocus(nodeList)
       }
     }
   }
