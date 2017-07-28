@@ -149,6 +149,7 @@ export default class Pentonville extends Component {
       <div
         className='pentonville'
         ref='pentonville'
+        tabIndex={0}
         onKeyDown={this.onKeyDown}
         onKeyUp={this.onKeyUp}
         onFocus={this.onFocus}
