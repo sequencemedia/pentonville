@@ -20,8 +20,7 @@ const NEUTRAL = 0 // no change
 const POSITIVE = +1 // move right
 const NEGATIVE = -1 // move left
 
-const isKeyTab = (key) => key === 'Tab'
-
+const isKeyTab = ({ key }) => key === 'Tab'
 const inVisible = ({ display, visibility }) => (display === 'none' || visibility === 'hidden')
 const isVisible = (computedStyle) => !inVisible(computedStyle)
 
@@ -68,9 +67,7 @@ export default class Pentonville extends Component {
   }
 
   onKeyDown = (event) => {
-    const { key } = event
-
-    if (isKeyTab(key)) {
+    if (isKeyTab(event)) {
       const { target } = event
       const nodeList = this.getNodeListArray()
 
@@ -83,9 +80,7 @@ export default class Pentonville extends Component {
   }
 
   onKeyUp = (event) => {
-    const { key } = event
-
-    if (isKeyTab(key)) {
+    if (isKeyTab(event)) {
       const { target } = event
       const nodeList = this.getNodeListArray()
 
@@ -98,17 +93,19 @@ export default class Pentonville extends Component {
   }
 
   onFocus = (event) => {
-    const {
-      target,
-      relatedTarget
-    } = event
     const nodeList = this.getNodeListArray()
+    const {
+      target
+    } = event
 
     if (!nodeList.includes(target)) {
       event.stopPropagation()
       getFirst(nodeList).focus()
     } else {
       const pentonville = this.getPentonville()
+      const {
+        relatedTarget
+      } = event
 
       if (!pentonville.contains(relatedTarget)) {
         event.stopPropagation()
@@ -118,17 +115,19 @@ export default class Pentonville extends Component {
   }
 
   onBlur = (event) => {
-    const {
-      target,
-      relatedTarget
-    } = event
     const nodeList = this.getNodeListArray()
+    const {
+      target
+    } = event
 
     if (!nodeList.includes(target)) {
       event.stopPropagation()
       getFirst(nodeList).focus()
     } else {
       const pentonville = this.getPentonville()
+      const {
+        relatedTarget
+      } = event
 
       if (!pentonville.contains(relatedTarget)) {
         event.stopPropagation()
