@@ -67,7 +67,7 @@ export default class Pentonville extends Component {
       .sort(sortByTabIndex)
   }
 
-  retainFocus ([ node ]) {
+  retainFocus ([ node ] = []) {
     (node || this.getPentonville())
       .focus()
   }
@@ -80,7 +80,7 @@ export default class Pentonville extends Component {
       if (isOmega(target, nodeList)) {
         event.preventDefault()
         event.stopPropagation()
-        retainFocus(nodeList)
+        this.retainFocus(nodeList)
       }
     }
   }
@@ -106,7 +106,7 @@ export default class Pentonville extends Component {
 
     if (!nodeList.includes(target)) {
       event.stopPropagation()
-      retainFocus(nodeList)
+      this.retainFocus(nodeList)
     } else {
       const pentonville = this.getPentonville()
       const {
@@ -115,7 +115,7 @@ export default class Pentonville extends Component {
 
       if (!pentonville.contains(relatedTarget)) {
         event.stopPropagation()
-        retainFocus(nodeList)
+        this.retainFocus(nodeList)
       }
     }
   }
@@ -128,7 +128,7 @@ export default class Pentonville extends Component {
 
     if (!nodeList.includes(target)) {
       event.stopPropagation()
-      retainFocus(nodeList)
+      this.retainFocus(nodeList)
     } else {
       const pentonville = this.getPentonville()
       const {
@@ -137,7 +137,7 @@ export default class Pentonville extends Component {
 
       if (!pentonville.contains(relatedTarget)) {
         event.stopPropagation()
-        retainFocus(nodeList)
+        this.retainFocus(nodeList)
       }
     }
   }
