@@ -104,20 +104,20 @@ export default class Pentonville extends Component {
       target
     } = event
 
-    if (!nodeList.includes(target)) {
-      event.stopPropagation()
-      this.retainFocus(nodeList)
-    } else {
+    if (nodeList.includes(target)) {
       const pentonville = this.getPentonville()
       const {
         relatedTarget
       } = event
 
-      if (!pentonville.contains(relatedTarget)) {
-        event.stopPropagation()
-        this.retainFocus(nodeList)
+      if (pentonville.contains(relatedTarget)) {
+        return
       }
+
     }
+
+    event.stopPropagation()
+    this.retainFocus(nodeList)
   }
 
   onBlur = (event) => {
@@ -126,20 +126,19 @@ export default class Pentonville extends Component {
       target
     } = event
 
-    if (!nodeList.includes(target)) {
-      event.stopPropagation()
-      this.retainFocus(nodeList)
-    } else {
+    if (nodeList.includes(target)) {
       const pentonville = this.getPentonville()
       const {
         relatedTarget
       } = event
 
-      if (!pentonville.contains(relatedTarget)) {
-        event.stopPropagation()
-        this.retainFocus(nodeList)
+      if (pentonville.contains(relatedTarget)) {
+        return
       }
     }
+
+    event.stopPropagation()
+    this.retainFocus(nodeList)
   }
 
   render () {
