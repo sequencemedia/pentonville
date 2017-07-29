@@ -23,6 +23,7 @@ const NEGATIVE = -1 // move left
 const isKeyTab = ({ key }) => key === 'Tab'
 const inVisible = ({ display, visibility }) => (display === 'none' || visibility === 'hidden')
 const isVisible = (computedStyle) => !inVisible(computedStyle)
+const toNumber = (value) => parseInt(value, 10)
 
 const getVisibilityFromComputedStyle = (element) => (
   isVisible(getComputedStyle(element))
@@ -35,8 +36,15 @@ const getVisibilityFromComputedStyle = (element) => (
 const filterByVisibility = (e) => getVisibilityFromComputedStyle(e)
 
 const sortByTabIndex = (current, sibling) => { // current, sibling
-  const currentIndex = current.hasAttribute('tabindex') ? current.getAttribute('tabindex') : NaN
-  const siblingIndex = sibling.hasAttribute('tabindex') ? sibling.getAttribute('tabindex') : NaN
+  /* String or null */
+  const currentValue = current.getAttribute('tabindex')
+  const siblingValue = sibling.getAttribute('tabindex')
+
+  let c, s
+
+  /* Only positive integers or NaN */
+  const currentIndex = !!(c = toNumber(currentValue)) ? c : NaN
+  const siblingIndex = !!(s = toNumber(siblingValue)) ? s : NaN
 
   return isNaN(currentIndex) ? isNaN(siblingIndex) ? NEUTRAL : POSITIVE : isNaN(siblingIndex) ? NEGATIVE : currentIndex - siblingIndex
 }
@@ -53,7 +61,8 @@ const isOmega = (node, nodeList) => (
 )
 
 export default class Pentonville extends Component {
-  getPentonville () { return this.refs.pentonville }
+  setPentonville = (pentonville) => (pentonville) ? !!(this.pentonville = pentonville) : delete this.pentonville
+  getPentonville = () => this.pentonville
 
   queryForNodeList () {
     return this.getPentonville().querySelectorAll(SELECTOR)
@@ -74,19 +83,22 @@ export default class Pentonville extends Component {
 
   onKeyDown = (event) => {
     if (isKeyTab(event)) {
-      const {
-        target
-      } = event
       const nodeList = this.getNodeListArray()
 
       event.stopPropagation()
 
-      if (isOmega(target, nodeList)) {
-        event.preventDefault()
+      if (nodeList.length) {
+        const { target } = event
 
-        this.retainFocus(
-          getAlpha(nodeList)
-        )
+        if (isOmega(target, nodeList)) {
+          const alpha = getAlpha(nodeList)
+
+          event.preventDefault()
+
+          this.retainFocus(
+            alpha
+          )
+        }
       }
     }
   }
@@ -103,51 +115,37 @@ export default class Pentonville extends Component {
     event.stopPropagation()
 
     if (nodeList.length) {
-      const {
-        target
-      } = event
+      const { target } = event
 
       if (nodeList.includes(target)) {
         return
+      } else {
+        const alpha = getAlpha(nodeList)
+
+        this.retainFocus(
+          alpha
+        )
       }
-
-      this.retainFocus(
-        getAlpha(nodeList)
-      )
-    } else {
-      const {
-        target
-      } = event
-      const pentonville = this.getPentonville()
-
-      if (target === pentonville) {
-        return
-      }
-
-      this.retainFocus(
-        pentonville
-      )
     }
   }
 
   onBlur = (event) => {
     const nodeList = this.getNodeListArray()
-    const {
-      relatedTarget
-    } = event
 
     event.stopPropagation()
 
-    if (nodeList.includes(relatedTarget)) {
-      return
-    } else {
-      const {
-        target
-      } = event
+    if (nodeList.length) {
+      const { relatedTarget } = event
 
-      this.retainFocus(
-        target
-      )
+      if (nodeList.includes(relatedTarget)) {
+        return
+      } else {
+        const { target } = event
+
+        this.retainFocus(
+          target
+        )
+      }
     }
   }
 
@@ -157,8 +155,7 @@ export default class Pentonville extends Component {
     return (
       <div
         className='pentonville'
-        ref='pentonville'
-        tabIndex={0}
+        ref={this.setPentonville}
         onKeyDown={this.onKeyDown}
         onKeyUp={this.onKeyUp}
         onFocus={this.onFocus}

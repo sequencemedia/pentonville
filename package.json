@@ -19,12 +19,15 @@
     "build": "babel src -d lib",
     "build:watch": "babel src -d lib -w",
     "prepublishOnly": "npm run build",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "standard": {
     "parser": "babel-eslint"
   },
   "devDependencies": {
+    "@storybook/react": "^3.1.9",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.25.0",
     "babel-eslint": "^7.2.3",
@@ -40,7 +43,8 @@
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-node": "^5.1.1",
     "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^3.0.1"
+    "eslint-plugin-standard": "^3.0.1",
+    "@storybook/react-dom": "^15.6.1"
   },
   "dependencies": {
     "prop-types": "^15.5.10",
