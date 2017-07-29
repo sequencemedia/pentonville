@@ -67,7 +67,7 @@ export default class Pentonville extends Component {
       .sort(sortByTabIndex)
   }
 
-  retainFocus ([ node ] = []) {
+  retainFocus (node) {
     (node || this.getPentonville())
       .focus()
   }
@@ -77,24 +77,21 @@ export default class Pentonville extends Component {
       const { target } = event
       const nodeList = this.getNodeListArray()
 
+      event.stopPropagation()
+
       if (isOmega(target, nodeList)) {
         event.preventDefault()
-        event.stopPropagation()
-        this.retainFocus(nodeList)
+
+        this.retainFocus(
+          getAlpha(nodeList)
+        )
       }
     }
   }
 
   onKeyUp = (event) => {
     if (isKeyTab(event)) {
-      const { target } = event
-      const nodeList = this.getNodeListArray()
-
-      if (isOmega(target, nodeList)) {
-        event.preventDefault()
-        event.stopPropagation()
-        return
-      }
+      event.stopPropagation()
     }
   }
 
@@ -104,41 +101,34 @@ export default class Pentonville extends Component {
       target
     } = event
 
+    event.stopPropagation()
+
     if (nodeList.includes(target)) {
-      const pentonville = this.getPentonville()
-      const {
-        relatedTarget
-      } = event
-
-      if (pentonville.contains(relatedTarget)) {
-        return
-      }
-
+      return
     }
 
-    event.stopPropagation()
-    this.retainFocus(nodeList)
+    this.retainFocus(
+      getAlpha(nodeList)
+    )
   }
 
   onBlur = (event) => {
     const nodeList = this.getNodeListArray()
     const {
-      target
+      relatedTarget
     } = event
 
-    if (nodeList.includes(target)) {
-      const pentonville = this.getPentonville()
+    event.stopPropagation()
+
+    if (nodeList.includes(relatedTarget)) {
+      return
+    } else {
       const {
-        relatedTarget
+        target
       } = event
 
-      if (pentonville.contains(relatedTarget)) {
-        return
-      }
+      this.retainFocus(target)
     }
-
-    event.stopPropagation()
-    this.retainFocus(nodeList)
   }
 
   render () {
