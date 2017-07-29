@@ -74,7 +74,9 @@ export default class Pentonville extends Component {
 
   onKeyDown = (event) => {
     if (isKeyTab(event)) {
-      const { target } = event
+      const {
+        target
+      } = event
       const nodeList = this.getNodeListArray()
 
       event.stopPropagation()
@@ -97,13 +99,14 @@ export default class Pentonville extends Component {
 
   onFocus = (event) => {
     const nodeList = this.getNodeListArray()
-    const {
-      target
-    } = event
 
     event.stopPropagation()
 
     if (nodeList.length) {
+      const {
+        target
+      } = event
+
       if (nodeList.includes(target)) {
         return
       }
@@ -112,6 +115,9 @@ export default class Pentonville extends Component {
         getAlpha(nodeList)
       )
     } else {
+      const {
+        target
+      } = event
       const pentonville = this.getPentonville()
 
       if (target === pentonville) {
