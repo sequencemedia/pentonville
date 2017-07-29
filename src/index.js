@@ -103,8 +103,14 @@ export default class Pentonville extends Component {
 
     event.stopPropagation()
 
-    if (nodeList.includes(target)) {
-      return
+    if (nodeList.length) {
+      if (nodeList.includes(target)) {
+        return
+      }
+
+      this.retainFocus(
+        getAlpha(nodeList)
+      )
     } else {
       const pentonville = this.getPentonville()
 
@@ -113,7 +119,7 @@ export default class Pentonville extends Component {
       }
 
       this.retainFocus(
-        getAlpha(nodeList)
+        pentonville
       )
     }
   }
@@ -133,7 +139,9 @@ export default class Pentonville extends Component {
         target
       } = event
 
-      this.retainFocus(target)
+      this.retainFocus(
+        target
+      )
     }
   }
 
