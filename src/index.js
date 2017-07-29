@@ -105,11 +105,17 @@ export default class Pentonville extends Component {
 
     if (nodeList.includes(target)) {
       return
-    }
+    } else {
+      const pentonville = this.getPentonville()
 
-    this.retainFocus(
-      getAlpha(nodeList)
-    )
+      if (target === pentonville) {
+        return
+      }
+
+      this.retainFocus(
+        getAlpha(nodeList)
+      )
+    }
   }
 
   onBlur = (event) => {
