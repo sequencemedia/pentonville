@@ -134,14 +134,12 @@ export default class Pentonville extends Component {
 
     const { relatedTarget: DELTA } = event
 
-    if (!this.canFocus(DELTA)) {
-      if (!this.hasNodeListMatch(DELTA)) { // relatedTarget can be null
-        const { target: DELTA } = event
+    if (!this.hasNodeListMatch(DELTA)) { // relatedTarget can be null
+      const { target: DELTA } = event
 
-        this.retainFocus(
-          DELTA
-        )
-      }
+      this.retainFocus(
+        DELTA
+      )
     }
   }
 
