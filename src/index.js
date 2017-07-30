@@ -1,6 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import {
+  filter,
+  map,
+  sort,
+  reduce
+} from './array'
+
 const SELECTOR = `
 /*
  * Implicit "tabindex"
@@ -16,112 +23,8 @@ a[href]:not([tabindex^='-']),
  */
 *[tabindex]:not([tabindex^='-']):not(:disabled)
 `
-// const NEUTRAL = 0 // no change
-const INFINITY = Number.POSITIVE_INFINITY
-const POSITIVE = +1 // move right
-const NEGATIVE = -1 // move left
 
 const isKeyTab = ({ key }) => key === 'Tab'
-const inVisible = ({ display, visibility }) => (display === 'none' || visibility === 'hidden')
-const isVisible = (computedStyle) => !inVisible(computedStyle)
-const toNumber = (value) => parseInt(value, 10)
-
-const getVisibilityFromComputedStyle = (element) => (
-  isVisible(getComputedStyle(element))
-    ? (element !== document.documentElement)
-      ? getVisibilityFromComputedStyle(element.parentElement)
-      : true
-    : false
-)
-
-const filter = (e) => getVisibilityFromComputedStyle(e)
-
-function map (delta, order) {
-  const value = toNumber(delta.getAttribute('tabindex'))
-  const index = isNaN(value) || value === 0 ? INFINITY : value
-  return ({
-    delta,
-    order,
-    index
-  })
-}
-
-function sort ({
-  order: currentOrder,
-  index: currentIndex }, {
-  order: siblingOrder,
-  index: siblingIndex
-}) {
-  /*
-   * 'currentOrder' and 'siblingOrder' can never be the same (they are
-   *  mapped from the index of an element's position in the DOM) so
-   *  it's only necessary to test for "less than"
-   */
-  if (currentOrder < siblingOrder) {
-    if (currentIndex === INFINITY) {
-      if (siblingIndex === INFINITY) {
-        return NEGATIVE
-      } else {
-        /*
-         * inifinity is always more than 'siblingIndex'
-         */
-        return POSITIVE
-      }
-    } else {
-      if (siblingIndex === INFINITY) {
-        /*
-         * 'currentIndex' is always less than infinity
-         */
-        return NEGATIVE
-      } else {
-        return currentIndex - siblingIndex
-      }
-    }
-  } else {
-    /*
-     *  "more than" is the necessary consequence of not "less than"
-     */
-    if (currentIndex === INFINITY) {
-      /*
-       * 'currentOrder' is more than 'siblingOrder' so if
-       * 'currentIndex' is inifinity then the result must be POSITIVE
-       */
-      return POSITIVE
-    } else {
-      if (siblingIndex === INFINITY) {
-        /*
-         * 'currentIndex' is always less than infinity
-         */
-        return NEGATIVE
-      } else {
-        return currentIndex - siblingIndex
-      }
-    }
-  }
-}
-
-const reduce = (array, { delta }, i, a) => {
-  if (i) {
-    const { type } = delta
-    if (type === 'radio') {
-      const n = (i - 1)
-      const { delta: alpha } = a[n]
-      const {
-        type: TYPE
-      } = alpha
-      if (type === TYPE) {
-        const { name } = delta
-        const {
-          name: NAME
-        } = alpha
-        if (name === NAME) {
-          return array
-        }
-      }
-    }
-  }
-  return array.concat(delta)
-}
 
 const getAlpha = ([ alpha ]) => alpha
 const getOmega = ([ ...nodeList ]) => nodeList.pop()
@@ -154,7 +57,7 @@ export default class Pentonville extends Component {
   getNodeListArray () {
     const nodeList = this.queryForNodeList()
     return Array.from(nodeList)
-      .filter(filter)
+      .filter((e) => filter(e, this.getPentonville()))
       .map(map)
       .sort(sort)
       .reduce(reduce, [])
@@ -202,9 +105,9 @@ export default class Pentonville extends Component {
   onFocus = (event) => {
     event.stopPropagation()
 
-    const { target: delta } = event
+    const { target: DELTA } = event
 
-    if (this.hasNodeListMatch(delta)) {
+    if (this.hasNodeListMatch(DELTA)) {
       return
     } else {
       const nodeList = this.getNodeListArray()
@@ -222,15 +125,15 @@ export default class Pentonville extends Component {
   onBlur = (event) => {
     event.stopPropagation()
 
-    const { relatedTarget: delta } = event
+    const { relatedTarget: DELTA } = event
 
-    if (this.hasNodeListMatch(delta)) { // relatedTarget can be null
+    if (this.hasNodeListMatch(DELTA)) { // relatedTarget can be null
       return
     } else {
-      const { target: delta } = event
+      const { target: DELTA } = event
 
       this.retainFocus(
-        delta
+        DELTA
       )
     }
   }
