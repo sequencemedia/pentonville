@@ -18,7 +18,7 @@ export const filter = (e, p = document.documentElement) => getVisibilityFromComp
 
 export function map (delta, order) {
   const value = toNumber(delta.getAttribute('tabindex'))
-  const index = isNaN(value) || value === 0 ? INFINITY : value
+  const index = isNaN(value) || value === 0 ? INFINITY : value // const index = (value > 0) ? value : INFINITY
   return ({
     delta,
     order,
@@ -53,50 +53,6 @@ export const sort = ({
         ? NEGATIVE
         : currentIndex - siblingIndex
 )
-
-/*
-  if (currentOrder < siblingOrder) {
-    if (currentIndex === INFINITY) {
-      if (siblingIndex === INFINITY) {
-        return NEGATIVE
-      } else {
-        *//*
-         * inifinity is always more than 'siblingIndex'
-         *//*
-        return POSITIVE
-      }
-    } else {
-      if (siblingIndex === INFINITY) {
-        *//*
-         * 'currentIndex' is always less than infinity
-         *//*
-        return NEGATIVE
-      } else {
-        return currentIndex - siblingIndex
-      }
-    }
-  } else {
-    *//*
-     *  "more than" is the necessary consequence of not "less than"
-     *//*
-    if (currentIndex === INFINITY) {
-      *//*
-       * 'currentOrder' is more than 'siblingOrder' so if
-       * 'currentIndex' is inifinity then the result must be POSITIVE
-       *//*
-      return POSITIVE
-    } else {
-      if (siblingIndex === INFINITY) {
-        *//*
-         * 'currentIndex' is always less than infinity
-         *//*
-        return NEGATIVE
-      } else {
-        return currentIndex - siblingIndex
-      }
-    }
-  }
-*/
 
 export function reduce (array, { delta }, i, a) {
   if (i) {
