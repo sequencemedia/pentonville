@@ -1,8 +1,6 @@
-import React from 'react';
-
-import { storiesOf } from '@storybook/react';
-
-import Pentonville from '../index';
+import React from 'react'
+import { storiesOf } from '@storybook/react'
+import Pentonville from '../index'
 
 storiesOf('Pentonville', module)
   .add('With one tabable child', () => (
@@ -48,16 +46,15 @@ storiesOf('Pentonville', module)
 
           <textarea />
 
-          <input type='checkbox' name='checkbox[1]' />
-          <input type='checkbox' name='checkbox[2]' />
-          <input type='checkbox' name='checkbox[3]' />
+          <input type='checkbox' />
+          <input type='checkbox' />
+          <input type='checkbox' />
 
           <textarea />
 
-          <input type='checkbox' name='checkbox[4]' />
-          <input type='checkbox' name='checkbox[5]' />
-          <input type='checkbox' name='checkbox[6]' />
-
+          <input tabIndex='8' type='checkbox' />
+          <input type='checkbox' />
+          <input tabIndex='9' type='checkbox' />
 
           <input type='password' name='password' value='1' />
 
@@ -112,4 +109,4 @@ storiesOf('Pentonville', module)
         Lorem ipsum
       </p>
     </Pentonville>
-  ));
+  ))

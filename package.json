@@ -20,6 +20,8 @@
     "build:watch": "babel src -d lib -w",
     "prepublishOnly": "npm run build",
     "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "lint:all": "eslint src stories",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
