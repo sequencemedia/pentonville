@@ -19,6 +19,7 @@ a[href]:not([tabindex^='-']),
 const NEUTRAL = 0 // no change
 const POSITIVE = +1 // move right
 const NEGATIVE = -1 // move left
+const INFINITY = Number.POSITIVE_INFINITY
 
 const isKeyTab = ({ key }) => key === 'Tab'
 const inVisible = ({ display, visibility }) => (display === 'none' || visibility === 'hidden')
@@ -33,24 +34,124 @@ const getVisibilityFromComputedStyle = (element) => (
     : false
 )
 
-const filterByVisibility = (e) => getVisibilityFromComputedStyle(e)
+const filter = (e) => getVisibilityFromComputedStyle(e)
 
-const sortByTabIndex = (current, sibling) => { // current, sibling
-  /* String or null */
-  const currentValue = current.getAttribute('tabindex')
-  const siblingValue = sibling.getAttribute('tabindex')
+function map (delta, order) {
+  const value = toNumber(delta.getAttribute('tabindex'))
+  const index = isNaN(value) || value === 0 ? INFINITY : value
+  return ({
+    delta,
+    order,
+    index
+  })
+}
 
-  let c, s
+function sort ({
+  order: currentOrder,
+  index: currentIndex }, {
+  order: siblingOrder,
+  index: siblingIndex
+}) {
+  /*
+   * 'currentOrder' and 'siblingOrder' can never be the same (they are
+   *  mapped from the index of an element's position in the DOM) so
+   *  it's only necessary to test for "more than" or "less than"
+   */
+  if (currentOrder < siblingOrder) {
+    if (currentIndex === INFINITY) {
+      if (siblingIndex === INFINITY) { // if (currentIndex === siblingIndex) {
+        return NEGATIVE
+      } else {
+        /*
+         * inifinity is always more than 'siblingIndex'
+         */
+        return POSITIVE
+      }
+    } else {
+      if (siblingIndex === INFINITY) {
+        /*
+         * 'currentIndex' is always less than infinity
+         */
+        return NEGATIVE
+      } else {
+        if (currentIndex === siblingIndex) {
+          return NEGATIVE
+        } else {
+          if (currentIndex < siblingIndex) {
+            return NEGATIVE
+          }
 
-  /* Only positive integers or NaN */
-  const currentIndex = !!(c = toNumber(currentValue)) ? c : NaN
-  const siblingIndex = !!(s = toNumber(siblingValue)) ? s : NaN
+          if (currentIndex > siblingIndex) {
+            return POSITIVE
+          }
+        }
+      }
+    }
+  }
 
-  return isNaN(currentIndex) ? isNaN(siblingIndex) ? NEUTRAL : POSITIVE : isNaN(siblingIndex) ? NEGATIVE : currentIndex - siblingIndex
+  if (currentOrder > siblingOrder) {
+    if (currentIndex === INFINITY) {
+      if (siblingIndex === INFINITY) { // if (currentIndex === siblingIndex) {
+        return POSITIVE
+      } else {
+        /*
+         * inifinity is always more than 'siblingIndex'
+         */
+        return POSITIVE
+      }
+    } else {
+      if (siblingIndex === INFINITY) {
+        /*
+         * 'currentIndex' is always less than infinity
+         */
+        return NEGATIVE
+      } else {
+        if (currentIndex === siblingIndex) {
+          return POSITIVE
+        } else {
+          if (currentIndex < siblingIndex) {
+            return NEGATIVE
+          }
+
+          if (currentIndex > siblingIndex) {
+            return POSITIVE
+          }
+        }
+      }
+    }
+  }
+}
+
+const reduce = (array, { delta }, i, a) => {
+  if (i) {
+    const { type } = delta
+    if (type === 'radio') {
+      const n = (i - 1)
+      const { delta: alpha } = a[n]
+      const {
+        type: TYPE
+      } = alpha
+      if (type === TYPE) {
+        const { name } = delta
+        const {
+          name: NAME
+        } = alpha
+        if (name === NAME) {
+          return array
+        }
+      }
+    }
+  }
+  return array.concat(delta)
 }
 
 const getAlpha = ([ alpha ]) => alpha
 const getOmega = ([ ...nodeList ]) => nodeList.pop()
+const getDelta = (delta, nodeList) => {
+  const i = nodeList.findIndex((node) => node === delta) + 1
+  const n = i === nodeList.length ? 0 : i
+  return nodeList[n]
+}
 
 const isAlpha = (node, nodeList) => (
   node === getAlpha(nodeList)
@@ -64,16 +165,21 @@ export default class Pentonville extends Component {
   setPentonville = (pentonville) => (pentonville) ? !!(this.pentonville = pentonville) : delete this.pentonville
   getPentonville = () => this.pentonville
 
+  hasNodeListMatch (element) {
+    return this.getPentonville().contains(element) && element.matches(SELECTOR)
+  }
+
   queryForNodeList () {
     return this.getPentonville().querySelectorAll(SELECTOR)
   }
 
   getNodeListArray () {
     const nodeList = this.queryForNodeList()
-
     return Array.from(nodeList)
-      .filter(filterByVisibility)
-      .sort(sortByTabIndex)
+      .filter(filter)
+      .map(map)
+      .sort(sort)
+      .reduce(reduce, [])
   }
 
   retainFocus (node) {
@@ -90,13 +196,19 @@ export default class Pentonville extends Component {
       if (nodeList.length) {
         const { target } = event
 
+        event.preventDefault()
+
         if (isOmega(target, nodeList)) {
           const alpha = getAlpha(nodeList)
 
-          event.preventDefault()
-
           this.retainFocus(
             alpha
+          )
+        } else {
+          const delta = getDelta(target, nodeList)
+
+          this.retainFocus(
+            delta
           )
         }
       }
@@ -110,6 +222,25 @@ export default class Pentonville extends Component {
   }
 
   onFocus = (event) => {
+    event.stopPropagation()
+
+    const { target } = event
+
+    if (this.hasNodeListMatch(target)) {
+      return
+    } else {
+      const nodeList = this.getNodeListArray()
+
+      if (nodeList.length) {
+        const alpha = getAlpha(nodeList)
+
+        this.retainFocus(
+          alpha
+        )
+      }
+    }
+
+    /*
     const nodeList = this.getNodeListArray()
 
     event.stopPropagation()
@@ -127,9 +258,25 @@ export default class Pentonville extends Component {
         )
       }
     }
+    */
   }
 
   onBlur = (event) => {
+    event.stopPropagation()
+
+    const { relatedTarget } = event
+
+    if (relatedTarget && this.hasNodeListMatch(relatedTarget)) {
+      return
+    } else {
+      const { target } = event
+
+      this.retainFocus(
+        target
+      )
+    }
+
+    /*
     const nodeList = this.getNodeListArray()
 
     event.stopPropagation()
@@ -147,6 +294,7 @@ export default class Pentonville extends Component {
         )
       }
     }
+    */
   }
 
   render () {

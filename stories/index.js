@@ -6,37 +6,110 @@ import Pentonville from '../index';
 
 storiesOf('Pentonville', module)
   .add('With one tabable child', () => (
-    <Pentonville>
-      <p tabIndex='0'>
-        Lorem ipsum
-      </p>
-    </Pentonville>
+    <div tabIndex='0'>
+      <Pentonville>
+        <p tabIndex='0'>
+          Lorem ipsum
+        </p>
+      </Pentonville>
+    </div>
   ))
   .add('With several tabable children', () => (
-    <Pentonville>
-      <p tabIndex='0'>
-        Lorem ipsum
-      </p>
-      <form>
-        <input tabIndex='1' />
-        <input />
-        <input />
-        <input tabIndex='2' type='radio' name='a' value='1' />
-        <input type='radio' name='a' value='2' />
-        <input type='radio' name='a' value='3' />
-        <input type='checkbox' name='1' value='1' />
-        <input type='checkbox' name='2' value='2' />
-        <input type='checkbox' name='3' value='3' />
-        <select tabIndex='3' name='4'>
-          <option value='5'>Five</option>
-          <option value='6'>Six</option>
-          <option value='7'>Seven</option>
-        </select>
-      </form>
-      <p tabIndex='0'>
-        Lorem ipsum
-      </p>
-    </Pentonville>
+    <div tabIndex='0'>
+      <Pentonville>
+        <p tabIndex='1'>
+          Lorem ipsum
+        </p>
+        <form>
+          <input name='x' type='radio' />
+
+          <input name='y' />
+          <input name='z' />
+
+          <input name='x' type='radio' />
+          <input name='x' type='radio' />
+          <input name='x' type='radio' />
+          <input name='x' type='radio' />
+
+          <input name='y' />
+          <input name='z' />
+
+          <input name='x' type='radio' />
+
+          <input name='y' />
+          <input name='z' />
+
+          <input name='x' type='radio' />
+
+          <input name='y' />
+          <input name='z' />
+
+          <input name='x' type='radio' />
+
+          { /*
+
+          <textarea />
+
+          <input type='checkbox' name='checkbox[1]' />
+          <input type='checkbox' name='checkbox[2]' />
+          <input type='checkbox' name='checkbox[3]' />
+
+          <textarea />
+
+          <input type='checkbox' name='checkbox[4]' />
+          <input type='checkbox' name='checkbox[5]' />
+          <input type='checkbox' name='checkbox[6]' />
+
+          */ }
+
+          {/*
+
+
+
+          <input type='password' name='password' value='1' />
+
+          <input type='number' name='number' value='1' />
+
+          <input type='email' name='email' value='1' />
+
+          <select name='select'>
+            <option value='5'>Five</option>
+            <option value='6'>Six</option>
+            <option value='7'>Seven</option>
+          </select>
+
+          */}
+        </form>
+
+        <p tabIndex='7'>
+          Lorem ipsum
+        </p>
+
+        <p tabIndex='6'>
+          Lorem ipsum
+        </p>
+
+        <p tabIndex='5'>
+          Lorem ipsum
+        </p>
+
+        <p tabIndex='4'>
+          Lorem ipsum
+        </p>
+
+        <p tabIndex='3'>
+          Lorem ipsum
+        </p>
+
+        <p tabIndex='2'>
+          Lorem ipsum
+        </p>
+
+        <p tabIndex='0'>
+          Lorem ipsum
+        </p>
+      </Pentonville>
+    </div>
   ))
   .add('Without tabable children', () => (
     <Pentonville>
