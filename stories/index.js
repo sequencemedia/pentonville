@@ -25,6 +25,13 @@ storiesOf('Pentonville', module)
           <input name='z' />
 
           <input name='x' type='radio' />
+
+          <div style={{ display: 'none' }}>
+            <input name='x' type='radio' />
+            <input name='x' type='radio' />
+            <input name='x' type='radio' />
+          </div>
+
           <input name='x' type='radio' />
           <input name='x' type='radio' />
           <input name='x' type='radio' />
@@ -56,11 +63,11 @@ storiesOf('Pentonville', module)
           <input type='checkbox' />
           <input tabIndex='9' type='checkbox' />
 
-          <input type='password' name='password' value='1' />
+          <input type='password' name='password' defaultValue='1' />
 
-          <input type='number' name='number' value='1' />
+          <input type='number' name='number' defaultValue='1' />
 
-          <input type='email' name='email' value='1' />
+          <input type='email' name='email' defaultValue='1' />
 
           <select name='select'>
             <option value='5'>Five</option>
