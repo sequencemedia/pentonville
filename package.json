@@ -1,6 +1,6 @@
 {
   "name": "pentonville",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Pentonville",
   "main": "./index.js",
   "keywords": [
@@ -51,7 +51,6 @@
   },
   "dependencies": {
     "prop-types": "^15.5.10",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react": "^15.6.1"
   }
 }

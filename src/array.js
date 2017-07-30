@@ -26,61 +26,79 @@ export function map (delta, order) {
   })
 }
 
-export function sort ({
+/*
+ * 'currentOrder' and 'siblingOrder' can never be the same (they are
+ *  mapped from the index of an element's position in the DOM) so
+ *  it's only necessary to test for one or the other: here, the test
+ *  is for "less than" (such that "else" implies "more than" and need
+ *  not be tested for explicitly)
+ */
+export const sort = ({
   order: currentOrder,
   index: currentIndex }, {
   order: siblingOrder,
   index: siblingIndex
-}) {
-  /*
-   * 'currentOrder' and 'siblingOrder' can never be the same (they are
-   *  mapped from the index of an element's position in the DOM) so
-   *  it's only necessary to test for "less than"
-   */
+}) => (
+  (currentOrder < siblingOrder)
+    ? (currentIndex === INFINITY)
+      ? (siblingIndex === INFINITY)
+        ? NEGATIVE
+        : POSITIVE
+      : (siblingIndex === INFINITY)
+        ? NEGATIVE
+        : currentIndex - siblingIndex
+    : (currentIndex === INFINITY)
+      ? POSITIVE
+      : (siblingIndex === INFINITY)
+        ? NEGATIVE
+        : currentIndex - siblingIndex
+)
+
+/*
   if (currentOrder < siblingOrder) {
     if (currentIndex === INFINITY) {
       if (siblingIndex === INFINITY) {
         return NEGATIVE
       } else {
-        /*
+        *//*
          * inifinity is always more than 'siblingIndex'
-         */
+         *//*
         return POSITIVE
       }
     } else {
       if (siblingIndex === INFINITY) {
-        /*
+        *//*
          * 'currentIndex' is always less than infinity
-         */
+         *//*
         return NEGATIVE
       } else {
         return currentIndex - siblingIndex
       }
     }
   } else {
-    /*
+    *//*
      *  "more than" is the necessary consequence of not "less than"
-     */
+     *//*
     if (currentIndex === INFINITY) {
-      /*
+      *//*
        * 'currentOrder' is more than 'siblingOrder' so if
        * 'currentIndex' is inifinity then the result must be POSITIVE
-       */
+       *//*
       return POSITIVE
     } else {
       if (siblingIndex === INFINITY) {
-        /*
+        *//*
          * 'currentIndex' is always less than infinity
-         */
+         *//*
         return NEGATIVE
       } else {
         return currentIndex - siblingIndex
       }
     }
   }
-}
+*/
 
-export const reduce = (array, { delta }, i, a) => {
+export function reduce (array, { delta }, i, a) {
   if (i) {
     const { type } = delta
     if (type === 'radio') {
