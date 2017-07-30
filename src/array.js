@@ -25,9 +25,9 @@ export const filter = (e, p = document.documentElement) => getVisibilityFromComp
 // const index = isNaN(value) || value === 0 ? INFINITY : value // const index = (value > 0) ? value : INFINITY
 /*
  *  Zero and NaN are falsy so default to Infinity (which may as well
- *  be zero but instead means "a number other than any possible
- *  tabindex"). The value of "order" is just the position of this
- *  element in the NodeList which results from the DOM query
+ *  be zero or NaN but instead means "a number other than any possible
+ *  positive tabindex"). The value of "order" is just the position
+ *  of this element in the NodeList which results from the DOM query
  */
 export const map = (delta, order) => ({
   delta,
