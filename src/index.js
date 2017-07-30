@@ -16,10 +16,10 @@ a[href]:not([tabindex^='-']),
  */
 *[tabindex]:not([tabindex^='-']):not(:disabled)
 `
-const NEUTRAL = 0 // no change
+// const NEUTRAL = 0 // no change
+const INFINITY = Number.POSITIVE_INFINITY
 const POSITIVE = +1 // move right
 const NEGATIVE = -1 // move left
-const INFINITY = Number.POSITIVE_INFINITY
 
 const isKeyTab = ({ key }) => key === 'Tab'
 const inVisible = ({ display, visibility }) => (display === 'none' || visibility === 'hidden')
@@ -91,14 +91,21 @@ function sort ({
 
   if (currentOrder > siblingOrder) {
     if (currentIndex === INFINITY) {
+      /*
+       * 'currentOrder' is more than 'siblingOrder' so if
+       * 'currentIndex' is inifinity then the result must be POSITIVE
+       */
+      return POSITIVE
+      /*
       if (siblingIndex === INFINITY) { // if (currentIndex === siblingIndex) {
         return POSITIVE
       } else {
-        /*
+        *//*
          * inifinity is always more than 'siblingIndex'
-         */
+         *//*
         return POSITIVE
       }
+      */
     } else {
       if (siblingIndex === INFINITY) {
         /*
