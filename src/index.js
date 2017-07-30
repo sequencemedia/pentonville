@@ -129,9 +129,22 @@ export default class Pentonville extends Component {
     }
   }
 
-  /*
-   *  This looks like it's doing something
-   */
+  onBlur = (event) => {
+    event.stopPropagation()
+
+    const { relatedTarget: DELTA } = event
+
+    if (!this.canFocus(DELTA)) {
+      if (!this.hasNodeListMatch(DELTA)) { // relatedTarget can be null
+        const { target: DELTA } = event
+
+        this.retainFocus(
+          DELTA
+        )
+      }
+    }
+  }
+
   onFocus = (event) => {
     event.stopPropagation()
 
@@ -148,25 +161,6 @@ export default class Pentonville extends Component {
             alpha
           )
         }
-      }
-    }
-  }
-
-  /*
-   *  All of the real work is done here
-   */
-  onBlur = (event) => {
-    event.stopPropagation()
-
-    const { relatedTarget: DELTA } = event
-
-    if (!this.canFocus(DELTA)) {
-      if (!this.hasNodeListMatch(DELTA)) { // relatedTarget can be null
-        const { target: DELTA } = event
-
-        this.retainFocus(
-          DELTA
-        )
       }
     }
   }
