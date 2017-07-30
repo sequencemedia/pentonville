@@ -96,16 +96,6 @@ function sort ({
        * 'currentIndex' is inifinity then the result must be POSITIVE
        */
       return POSITIVE
-      /*
-      if (siblingIndex === INFINITY) { // if (currentIndex === siblingIndex) {
-        return POSITIVE
-      } else {
-        *//*
-         * inifinity is always more than 'siblingIndex'
-         *//*
-        return POSITIVE
-      }
-      */
     } else {
       if (siblingIndex === INFINITY) {
         /*
@@ -172,7 +162,7 @@ export default class Pentonville extends Component {
   setPentonville = (pentonville) => (pentonville) ? !!(this.pentonville = pentonville) : delete this.pentonville
   getPentonville = () => this.pentonville
 
-  hasNodeListMatch (element) {
+  hasNodeListMatch (element) { // a null element returns false from 'contains'
     return this.getPentonville().contains(element) && element.matches(SELECTOR)
   }
 
@@ -246,26 +236,6 @@ export default class Pentonville extends Component {
         )
       }
     }
-
-    /*
-    const nodeList = this.getNodeListArray()
-
-    event.stopPropagation()
-
-    if (nodeList.length) {
-      const { target } = event
-
-      if (nodeList.includes(target)) {
-        return
-      } else {
-        const alpha = getAlpha(nodeList)
-
-        this.retainFocus(
-          alpha
-        )
-      }
-    }
-    */
   }
 
   onBlur = (event) => {
@@ -273,35 +243,15 @@ export default class Pentonville extends Component {
 
     const { relatedTarget } = event
 
-    if (relatedTarget && this.hasNodeListMatch(relatedTarget)) {
+    if (this.hasNodeListMatch(relatedTarget)) { // relatedTarget can be null
       return
     } else {
-      const { target } = event
+      const { target: delta } = event
 
       this.retainFocus(
-        target
+        delta
       )
     }
-
-    /*
-    const nodeList = this.getNodeListArray()
-
-    event.stopPropagation()
-
-    if (nodeList.length) {
-      const { relatedTarget } = event
-
-      if (nodeList.includes(relatedTarget)) {
-        return
-      } else {
-        const { target } = event
-
-        this.retainFocus(
-          target
-        )
-      }
-    }
-    */
   }
 
   render () {
