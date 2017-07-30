@@ -18,6 +18,15 @@ storiesOf('Pentonville', module)
   ))
   .add('With several tabable children', () => (
     <div tabIndex='0'>
+      <button disabled>
+        Button
+      </button>
+      <button>
+        Button
+      </button>
+      <p>
+        Lorem ipsum
+      </p>
       <Pentonville>
         <p tabIndex='0'>
           Lorem ipsum
@@ -28,7 +37,7 @@ storiesOf('Pentonville', module)
         }}>
           <input name='x' type='radio' />
 
-          <input name='y' />
+          <input name='y' tabIndex='-1' />
           <input name='z' />
 
           <input name='x' type='radio' />
