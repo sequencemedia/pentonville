@@ -147,22 +147,6 @@ export default class Pentonville extends Component {
 
   onFocus = (event) => {
     event.stopPropagation()
-
-    const { target: DELTA } = event
-
-    if (!this.canFocus(DELTA)) {
-      if (!this.hasNodeListMatch(DELTA)) { // it's very, very unlikely this will ever execute
-        const nodeList = this.getNodeListArray()
-
-        if (nodeList.length) {
-          const alpha = getAlpha(nodeList)
-
-          this.retainFocus(
-            alpha
-          )
-        }
-      }
-    }
   }
 
   render () {
