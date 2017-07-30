@@ -14,24 +14,34 @@ const getVisibilityFromComputedStyle = (element, parentElement) => (
     : false
 )
 
+/*
+ *  Recursion can stop at the "pentonville" element, which is passed as
+ *  "p", otherwise defaulting to the "document.documentElement" element
+ *  (which is the <html /> element) if it is not passed
+ */
 export const filter = (e, p = document.documentElement) => getVisibilityFromComputedStyle(e, p)
 
-export function map (delta, order) {
-  const value = toNumber(delta.getAttribute('tabindex'))
-  const index = isNaN(value) || value === 0 ? INFINITY : value // const index = (value > 0) ? value : INFINITY
-  return ({
-    delta,
-    order,
-    index
-  })
-}
+// const value = toNumber(delta.getAttribute('tabindex'))
+// const index = isNaN(value) || value === 0 ? INFINITY : value // const index = (value > 0) ? value : INFINITY
+/*
+ *  Zero and NaN are falsy so default to Infinity (which may as well
+ *  be zero but instead means "a number other than any possible
+ *  tabindex"). The value of "order" is just the position of this
+ *  element in the NodeList which results from the DOM query
+ */
+export const map = (delta, order) => ({
+  delta,
+  order,
+  index: toNumber(delta.getAttribute('tabindex')) || INFINITY
+})
 
 /*
- * 'currentOrder' and 'siblingOrder' can never be the same (they are
- *  mapped from the index of an element's position in the DOM) so
- *  it's only necessary to test for one or the other: here, the test
- *  is for "less than" (such that "else" implies "more than" and need
- *  not be tested for explicitly)
+ *  'currentOrder' and 'siblingOrder' can never be equal (because each
+ *  number represents an element's position in the DOM, and no two
+ *  elements can occupy the same position) so it's only necessary
+ *  to compare these numbers with "more than" or "less than": here,
+ *  the comparison is with "less than" and, consequently, "else"
+ *  necessarily implies "more than"
  */
 export const sort = ({
   order: currentOrder,
