@@ -55,11 +55,11 @@ function sort ({
   /*
    * 'currentOrder' and 'siblingOrder' can never be the same (they are
    *  mapped from the index of an element's position in the DOM) so
-   *  it's only necessary to test for "more than" or "less than"
+   *  it's only necessary to test for "less than"
    */
   if (currentOrder < siblingOrder) {
     if (currentIndex === INFINITY) {
-      if (siblingIndex === INFINITY) { // if (currentIndex === siblingIndex) {
+      if (siblingIndex === INFINITY) {
         return NEGATIVE
       } else {
         /*
@@ -74,22 +74,13 @@ function sort ({
          */
         return NEGATIVE
       } else {
-        if (currentIndex === siblingIndex) {
-          return NEGATIVE
-        } else {
-          if (currentIndex < siblingIndex) {
-            return NEGATIVE
-          }
-
-          if (currentIndex > siblingIndex) {
-            return POSITIVE
-          }
-        }
+        return currentIndex - siblingIndex
       }
     }
-  }
-
-  if (currentOrder > siblingOrder) {
+  } else {
+    /*
+     *  "more than" is the necessary consequence of not "less than"
+     */
     if (currentIndex === INFINITY) {
       /*
        * 'currentOrder' is more than 'siblingOrder' so if
@@ -103,17 +94,7 @@ function sort ({
          */
         return NEGATIVE
       } else {
-        if (currentIndex === siblingIndex) {
-          return POSITIVE
-        } else {
-          if (currentIndex < siblingIndex) {
-            return NEGATIVE
-          }
-
-          if (currentIndex > siblingIndex) {
-            return POSITIVE
-          }
-        }
+        return currentIndex - siblingIndex
       }
     }
   }
@@ -191,18 +172,18 @@ export default class Pentonville extends Component {
       event.stopPropagation()
 
       if (nodeList.length) {
-        const { target } = event
+        const { target: DELTA } = event
 
         event.preventDefault()
 
-        if (isOmega(target, nodeList)) {
+        if (isOmega(DELTA, nodeList)) {
           const alpha = getAlpha(nodeList)
 
           this.retainFocus(
             alpha
           )
         } else {
-          const delta = getDelta(target, nodeList)
+          const delta = getDelta(DELTA, nodeList)
 
           this.retainFocus(
             delta
@@ -221,9 +202,9 @@ export default class Pentonville extends Component {
   onFocus = (event) => {
     event.stopPropagation()
 
-    const { target } = event
+    const { target: delta } = event
 
-    if (this.hasNodeListMatch(target)) {
+    if (this.hasNodeListMatch(delta)) {
       return
     } else {
       const nodeList = this.getNodeListArray()
@@ -241,9 +222,9 @@ export default class Pentonville extends Component {
   onBlur = (event) => {
     event.stopPropagation()
 
-    const { relatedTarget } = event
+    const { relatedTarget: delta } = event
 
-    if (this.hasNodeListMatch(relatedTarget)) { // relatedTarget can be null
+    if (this.hasNodeListMatch(delta)) { // relatedTarget can be null
       return
     } else {
       const { target: delta } = event

@@ -17,7 +17,7 @@ storiesOf('Pentonville', module)
   .add('With several tabable children', () => (
     <div tabIndex='0'>
       <Pentonville>
-        <p tabIndex='1'>
+        <p tabIndex='0'>
           Lorem ipsum
         </p>
         <form>
@@ -46,8 +46,6 @@ storiesOf('Pentonville', module)
 
           <input name='x' type='radio' />
 
-          { /*
-
           <textarea />
 
           <input type='checkbox' name='checkbox[1]' />
@@ -59,11 +57,6 @@ storiesOf('Pentonville', module)
           <input type='checkbox' name='checkbox[4]' />
           <input type='checkbox' name='checkbox[5]' />
           <input type='checkbox' name='checkbox[6]' />
-
-          */ }
-
-          {/*
-
 
 
           <input type='password' name='password' value='1' />
@@ -77,15 +70,9 @@ storiesOf('Pentonville', module)
             <option value='6'>Six</option>
             <option value='7'>Seven</option>
           </select>
-
-          */}
         </form>
 
         <p tabIndex='7'>
-          Lorem ipsum
-        </p>
-
-        <p tabIndex='6'>
           Lorem ipsum
         </p>
 
@@ -93,11 +80,19 @@ storiesOf('Pentonville', module)
           Lorem ipsum
         </p>
 
-        <p tabIndex='4'>
+        <p tabIndex='3'>
           Lorem ipsum
         </p>
 
-        <p tabIndex='3'>
+        <p tabIndex='1'>
+          Lorem ipsum
+        </p>
+
+        <p tabIndex='6'>
+          Lorem ipsum
+        </p>
+
+        <p tabIndex='4'>
           Lorem ipsum
         </p>
 
