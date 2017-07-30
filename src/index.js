@@ -8,20 +8,44 @@ import {
   reduce
 } from './array'
 
-const SELECTOR = `
-/*
- * Implicit "tabindex"
- */
-input:not([tabindex^='-']):not(:disabled),
-select:not([tabindex^='-']):not(:disabled),
-textarea:not([tabindex^='-']):not(:disabled),
-button:not([tabindex^='-']):not(:disabled),
-object:not([tabindex^='-']):not(:disabled)
-a[href]:not([tabindex^='-']),
-/*
- *  Explicit "tabindex"
- */
-*[tabindex]:not([tabindex^='-']):not(:disabled)
+const CANFOCUS = `
+  /*
+   * Implicit
+   */
+  label:not(:disabled), /* ? */
+  input:not(:disabled),
+  select:not(:disabled),
+  textarea:not(:disabled),
+  button:not(:disabled),
+  object:not(:disabled),
+  a[href],
+  area[href],
+  iframe,
+  embed,
+  /*
+   *  Explicit
+   */
+  *[tabindex]:not(:disabled),
+  *[contenteditable]:not(:disabled)
+`
+
+const TABINDEX = `
+  /*
+   * Implicit
+   */
+  label:not([tabindex^='-']):not(:disabled), /* ? */
+  input:not([tabindex^='-']):not(:disabled),
+  select:not([tabindex^='-']):not(:disabled),
+  textarea:not([tabindex^='-']):not(:disabled),
+  button:not([tabindex^='-']):not(:disabled),
+  object:not([tabindex^='-']):not(:disabled),
+  a[href]:not([tabindex^='-']),
+  area[href]:not([tabindex^='-']),
+  /*
+   *  Explicit
+   */
+  *[tabindex]:not([tabindex^='-']):not(:disabled),
+  *[contenteditable]:not([tabindex^='-']):not(:disabled)
 `
 
 const isKeyTab = ({ key }) => key === 'Tab'
@@ -44,12 +68,16 @@ export default class Pentonville extends Component {
   setPentonville = (pentonville) => (pentonville) ? !!(this.pentonville = pentonville) : delete this.pentonville
   getPentonville = () => this.pentonville
 
+  canFocus (element) { // a null element returns false from 'contains'
+    return this.getPentonville().contains(element) && element.matches(CANFOCUS)
+  }
+
   hasNodeListMatch (element) { // a null element returns false from 'contains'
-    return this.getPentonville().contains(element) && element.matches(SELECTOR)
+    return this.getPentonville().contains(element) && element.matches(TABINDEX)
   }
 
   queryForNodeList () {
-    return this.getPentonville().querySelectorAll(SELECTOR)
+    return this.getPentonville().querySelectorAll(TABINDEX)
   }
 
   getNodeListArray () {
@@ -101,35 +129,45 @@ export default class Pentonville extends Component {
     }
   }
 
+  /*
+   *  This looks like it's doing something
+   */
   onFocus = (event) => {
     event.stopPropagation()
 
     const { target: DELTA } = event
 
-    if (!this.hasNodeListMatch(DELTA)) {
-      const nodeList = this.getNodeListArray()
+    if (!this.canFocus(DELTA)) {
+      if (!this.hasNodeListMatch(DELTA)) { // it's very, very unlikely this will ever execute
+        const nodeList = this.getNodeListArray()
 
-      if (nodeList.length) {
-        const alpha = getAlpha(nodeList)
+        if (nodeList.length) {
+          const alpha = getAlpha(nodeList)
 
-        this.retainFocus(
-          alpha
-        )
+          this.retainFocus(
+            alpha
+          )
+        }
       }
     }
   }
 
+  /*
+   *  All of the real work is done here
+   */
   onBlur = (event) => {
     event.stopPropagation()
 
     const { relatedTarget: DELTA } = event
 
-    if (!this.hasNodeListMatch(DELTA)) { // relatedTarget can be null
-      const { target: DELTA } = event
+    if (!this.canFocus(DELTA)) {
+      if (!this.hasNodeListMatch(DELTA)) { // relatedTarget can be null
+        const { target: DELTA } = event
 
-      this.retainFocus(
-        DELTA
-      )
+        this.retainFocus(
+          DELTA
+        )
+      }
     }
   }
 
