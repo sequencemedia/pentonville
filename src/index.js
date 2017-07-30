@@ -30,17 +30,15 @@ const getAlpha = ([ alpha ]) => alpha
 const getOmega = ([ ...nodeList ]) => nodeList.pop()
 const getDelta = (delta, nodeList) => {
   const i = nodeList.findIndex((node) => node === delta) + 1
-  const n = i === nodeList.length ? 0 : i
+  const n = (i === nodeList.length)
+    ? 0
+    : i
   return nodeList[n]
 }
 
-const isAlpha = (node, nodeList) => (
-  node === getAlpha(nodeList)
-)
+const isAlpha = (node, nodeList) => node === getAlpha(nodeList) // eslint-disable-line
 
-const isOmega = (node, nodeList) => (
-  node === getOmega(nodeList)
-)
+const isOmega = (node, nodeList) => node === getOmega(nodeList)
 
 export default class Pentonville extends Component {
   setPentonville = (pentonville) => (pentonville) ? !!(this.pentonville = pentonville) : delete this.pentonville
@@ -55,8 +53,9 @@ export default class Pentonville extends Component {
   }
 
   getNodeListArray () {
-    const nodeList = this.queryForNodeList()
-    return Array.from(nodeList)
+    return Array.from(
+      this.queryForNodeList()
+    )
       .filter((e) => filter(e, this.getPentonville()))
       .map(map)
       .sort(sort)
@@ -107,9 +106,7 @@ export default class Pentonville extends Component {
 
     const { target: DELTA } = event
 
-    if (this.hasNodeListMatch(DELTA)) {
-      return
-    } else {
+    if (!this.hasNodeListMatch(DELTA)) {
       const nodeList = this.getNodeListArray()
 
       if (nodeList.length) {
@@ -127,9 +124,7 @@ export default class Pentonville extends Component {
 
     const { relatedTarget: DELTA } = event
 
-    if (this.hasNodeListMatch(DELTA)) { // relatedTarget can be null
-      return
-    } else {
+    if (!this.hasNodeListMatch(DELTA)) { // relatedTarget can be null
       const { target: DELTA } = event
 
       this.retainFocus(
@@ -149,7 +144,7 @@ export default class Pentonville extends Component {
         onKeyUp={this.onKeyUp}
         onFocus={this.onFocus}
         onBlur={this.onBlur}>
-          {children}
+        {children}
       </div>
     )
   }
