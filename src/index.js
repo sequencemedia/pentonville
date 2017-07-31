@@ -68,12 +68,16 @@ export default class Pentonville extends Component {
   setPentonville = (pentonville) => (pentonville) ? !!(this.pentonville = pentonville) : delete this.pentonville
   getPentonville = () => this.pentonville
 
-  canFocus (element) { // a null element returns false from 'contains'
-    return this.getPentonville().contains(element) && element.matches(CANFOCUS)
+  inPentonville (element) { // null returns false from 'contains'
+    return this.getPentonville().contains(element)
   }
 
-  hasNodeListMatch (element) { // a null element returns false from 'contains'
-    return this.getPentonville().contains(element) && element.matches(TABINDEX)
+  canFocus (element) {
+    return this.inPentonville(element) && element.matches(CANFOCUS)
+  }
+
+  hasNodeListMatch (element) {
+    return this.inPentonville(element) && element.matches(TABINDEX)
   }
 
   queryForNodeList () {
@@ -134,7 +138,7 @@ export default class Pentonville extends Component {
 
     const { relatedTarget: DELTA } = event
 
-    if (!this.hasNodeListMatch(DELTA)) { // relatedTarget can be null
+    if (!this.canFocus(DELTA)) { // relatedTarget can be null
       const { target: DELTA } = event
 
       this.retainFocus(
