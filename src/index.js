@@ -16,7 +16,9 @@ import {
 const isKeyTab = ({ key }) => key === 'Tab'
 
 const getAlpha = ([ alpha ]) => alpha
+
 const getOmega = ([ ...nodeList ]) => nodeList.pop()
+
 const getDelta = (delta, nodeList) => {
   const i = nodeList.findIndex((node) => node === delta) + 1
   const n = (i === nodeList.length)
