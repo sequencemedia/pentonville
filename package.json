@@ -4,7 +4,14 @@
   "description": "Pentonville",
   "main": "./index.js",
   "keywords": [
-    "Pentonville"
+    "Pentonville",
+    "React",
+    "tab",
+    "tabindex",
+    "input",
+    "HTML",
+    "element",
+    "focus"
   ],
   "repository": {
     "type": "git",
