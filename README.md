@@ -21,7 +21,7 @@ Some other `HTML` elements can be made to accept focus with an explicit tab inde
 
 ```
 <p tabindex="0">
-    This paragraph can accept focus.
+	This paragraph can accept focus.
 </p>
 ```
 
@@ -29,7 +29,7 @@ In `React` the attribute is in camel case but is otherwise the same.
 
 ```
 <p tabIndex='0'>
-    This paragraph can accept focus.
+	This paragraph can accept focus.
 </p>
 ```
 
