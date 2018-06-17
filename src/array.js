@@ -69,7 +69,7 @@ export function reduce (array, { delta }, i, a) {
     const { type } = delta
     if (type === 'radio') {
       const n = (i - 1)
-      const { delta: alpha } = a[n]
+      const { delta: alpha } = a[n] // const { [n]: { delta: alpha } } = a
       const {
         type: TYPE
       } = alpha
