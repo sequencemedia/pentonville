@@ -15,7 +15,7 @@ Once focus enters _Pentonville_ it cannot leave.
 
 ## On tab flow and focus
 
-Every `<form />` input element has an implicit tab index which enables them to accept focus, and be tabbed between, from one to another, in the order they appear in the document. The value of the implicit tab index is `0`. 
+Every `<form />` input element has an implicit tab index which enables them to accept focus, and be tabbed between, from one to another, in the order they appear in the document. The value of the implicit tab index is `0`.
 
 Some other `HTML` elements can be made to accept focus with an explicit tab index of the same value.
 
@@ -43,7 +43,7 @@ Positive tab indexes are tabbed to in sequence, from the lowest to the highest v
 
 Sometimes it is desirable to prevent tab flow and focus from moving beyond the boundary of a set of `HTML` elements. _Pentonville_ is that boundary: once focus has entered, it won't escape.
 
-Tab flow is maintained by moving focus through the order of each element's tab index, from the first to the last, when tab flow is returned to the first element again. 
+Tab flow is maintained by moving focus through the order of each element's tab index, from the first to the last, when tab flow is returned to the first element again.
 
 Focus can be put on any element in the sequence, in which case it will proceed according to the tab index. In other words: focus can be put onto an element with a tab index value of `3` and have the next element in the tab flow be the element with a tab index of `4`, then `5` and so on, until the positive tab index values have been exhausted and flow proceeds through each element with a tab index of `0`, then onto `1` and `2` and back to `3` again.
 
@@ -51,9 +51,9 @@ Focus cannot be put onto any other element. _Pentonville_ won't permit it. Focus
 
 ## Demonstrating _Pentonville_
 
-[Example `Storybooks` are available on GitHub](https://github.com/sequencemedia/Pentonville). 
+[Example `Storybooks` are available on GitHub](https://github.com/sequencemedia/pentonville).
 
-Clone the repository, then: 
+Clone the repository, then:
 
 ```
 npm install
