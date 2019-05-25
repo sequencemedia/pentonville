@@ -2,7 +2,7 @@ import React from 'react'
 
 import { storiesOf } from '@storybook/react'
 import { action } from '@storybook/addon-actions'
-import Pentonville from '../index'
+import Pentonville from 'pentonville'
 
 const onSubmit = action('on-submit')
 const onClick = action('on-click')
