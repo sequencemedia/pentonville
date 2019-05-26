@@ -2,8 +2,8 @@
 **/npm-debug.log
 
 # Storybook
-./.storybook
-./stories
+.storybook
+stories
 
 # NPM
 .npmrc
