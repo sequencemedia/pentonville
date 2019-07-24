@@ -1,13 +1,13 @@
 module.exports = {
-  'compact': true,
-  'comments': false,
-  'presets': [
+  compact: true,
+  comments: false,
+  presets: [
     [
       '@babel/env', {
         useBuiltIns: 'entry',
         targets: {
           node: 'current',
-          'browsers': [
+          browsers: [
             'last 2 versions'
           ]
         },
@@ -16,7 +16,7 @@ module.exports = {
     ],
     '@babel/react'
   ],
-  'plugins': [
+  plugins: [
     [
       '@babel/proposal-class-properties',
       {
@@ -27,8 +27,8 @@ module.exports = {
       'module-resolver', {
         root: ['./src'],
         cwd: 'babelrc',
-        'alias': {
-          'pentonville': './src'
+        alias: {
+          pentonville: './src'
         }
       }
     ]

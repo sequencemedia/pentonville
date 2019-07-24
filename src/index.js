@@ -15,9 +15,9 @@ import {
 
 const isKeyTab = ({ key }) => key === 'Tab'
 
-const getAlpha = ([ alpha ]) => alpha
+const getAlpha = ([alpha]) => alpha
 
-const getOmega = ([ ...nodeList ]) => nodeList.pop()
+const getOmega = ([...nodeList]) => nodeList.pop()
 
 const getDelta = (delta, nodeList) => {
   const i = nodeList.findIndex((node) => node === delta) + 1
@@ -33,6 +33,7 @@ const isOmega = (node, nodeList) => node === getOmega(nodeList)
 
 export default class Pentonville extends Component {
   setPentonville = (pentonville) => (pentonville) ? !!(this.pentonville = pentonville) : delete this.pentonville
+
   getPentonville = () => this.pentonville
 
   inPentonville (element) { // null returns false from 'contains'
