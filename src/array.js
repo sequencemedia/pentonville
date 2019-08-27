@@ -45,7 +45,8 @@ export const map = (delta, order) => ({
  */
 export const sort = ({
   order: currentOrder,
-  index: currentIndex }, {
+  index: currentIndex
+}, {
   order: siblingOrder,
   index: siblingIndex
 }) => (

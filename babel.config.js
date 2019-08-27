@@ -11,7 +11,7 @@ module.exports = {
             'last 2 versions'
           ]
         },
-        corejs: '3.1.2'
+        corejs: 3
       }
     ],
     '@babel/react'
@@ -28,7 +28,8 @@ module.exports = {
         root: ['./src'],
         cwd: 'babelrc',
         alias: {
-          pentonville: './src'
+          pentonville: './src',
+          stories: './stories'
         }
       }
     ]
