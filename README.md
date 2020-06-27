@@ -2,12 +2,12 @@
 
 A `React` component for capturing tab and managing focus events.
 
-```
+```JSX
 <Pentonville>
-	<form>
-		<input name='one' />
-		<input name='two' />
-	</form>
+  <form>
+    <input name='one' />
+    <input name='two' />
+  </form>
 </Pentonville>
 ```
 
@@ -19,17 +19,17 @@ Every `<form />` input element has an implicit tab index which enables them to a
 
 Some other `HTML` elements can be made to accept focus with an explicit tab index of the same value.
 
-```
+```HTML
 <p tabindex="0">
-	This paragraph can accept focus.
+  This paragraph can accept focus.
 </p>
 ```
 
 In `React` the attribute is in camel case but is otherwise the same.
 
-```
+```JSX
 <p tabIndex='0'>
-	This paragraph can accept focus.
+  This paragraph can accept focus.
 </p>
 ```
 
@@ -55,7 +55,7 @@ Focus cannot be put onto any other element. _Pentonville_ won't permit it. Focus
 
 Clone the repository, then:
 
-```
+```bash
 npm install
 npm run storybook
 ```
