@@ -67,23 +67,36 @@ export const sort = ({
 
 export function reduce (array, { delta }, i, a) {
   if (i) {
-    const { type } = delta
+    const {
+      type
+    } = delta
+
     if (type === 'radio') {
       const n = (i - 1)
-      const { delta: alpha } = a[n] // const { [n]: { delta: alpha } } = a
+
+      const {
+        delta: alpha
+      } = a[n] // const { [n]: { delta: alpha } } = a
+
       const {
         type: TYPE
       } = alpha
+
       if (type === TYPE) {
-        const { name } = delta
+        const {
+          name
+        } = delta
+
         const {
           name: NAME
         } = alpha
+
         if (name === NAME) {
           return array
         }
       }
     }
   }
+
   return array.concat(delta)
 }

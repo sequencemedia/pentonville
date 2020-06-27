@@ -2,7 +2,6 @@
   "name": "pentonville",
   "version": "1.0.12",
   "description": "Pentonville",
-  "main": "./index.js",
   "keywords": [
     "Pentonville",
     "React",
@@ -13,17 +12,21 @@
     "element",
     "focus"
   ],
+  "main": "./index.js",
+  "author": "Jonathan Perry for Sequence Media Limited <sequencemedia@sequencemedia.net>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=12.18.1"
+  },
   "repository": {
     "type": "git",
     "url": "git@github.com/sequencemedia/pentonville.git"
   },
-  "author": "Jonathan Perry for Sequence Media Limited",
-  "license": "MIT",
   "scripts": {
     "build": "babel src -d lib",
     "build:watch": "babel src -d lib -w",
     "prepublishOnly": "npm run build",
-    "lint": "eslint *.js src stories",
+    "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
@@ -34,27 +37,27 @@
     "react": "^16.13.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.9.0",
-    "@babel/plugin-proposal-class-properties": "^7.8.3",
-    "@babel/preset-env": "^7.9.0",
-    "@babel/preset-react": "^7.9.4",
-    "@storybook/addon-actions": "^5.3.17",
-    "@storybook/addon-links": "^5.3.17",
-    "@storybook/react": "^5.3.17",
+    "@babel/cli": "^7.10.3",
+    "@babel/core": "^7.10.3",
+    "@babel/plugin-proposal-class-properties": "^7.10.1",
+    "@babel/preset-env": "^7.10.3",
+    "@babel/preset-react": "^7.10.1",
+    "@storybook/addon-actions": "^5.3.19",
+    "@storybook/addon-links": "^5.3.19",
+    "@storybook/react": "^5.3.19",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-module-resolver": "^4.0.0",
-    "core-js": "^3.6.4",
-    "eslint": "^6.8.0",
+    "core-js": "^3.6.5",
+    "eslint": "^7.3.1",
     "eslint-config-standard": "^14.1.1",
     "eslint-import-resolver-babel-module": "^5.1.2",
-    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-import": "^2.21.2",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-standard": "^4.0.1",
-    "husky": "^4.2.3"
+    "husky": "^4.2.5"
   },
   "husky": {
     "hooks": {
