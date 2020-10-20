@@ -7,7 +7,7 @@
     "browser": true,
     "es6": true
   },
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "parserOptions": {
     "ecmaVersion": 2020,
     "sourceType": "module",
@@ -16,6 +16,7 @@
     }
   },
   "plugins": [
+    "standard",
     "react"
   ],
   "rules": {
