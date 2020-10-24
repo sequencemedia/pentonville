@@ -9,8 +9,8 @@ const toNumber = (value) => parseInt(value, 10)
 const getVisibilityFromComputedStyle = (element, parentElement) => (
   isVisible(getComputedStyle(element))
     ? (element !== parentElement)
-      ? getVisibilityFromComputedStyle(element.parentElement, parentElement)
-      : true
+        ? getVisibilityFromComputedStyle(element.parentElement, parentElement)
+        : true
     : false
 )
 
@@ -52,17 +52,17 @@ export const sort = ({
 }) => (
   (currentOrder < siblingOrder)
     ? (currentIndex === INFINITY)
-      ? (siblingIndex === INFINITY)
-        ? NEGATIVE
-        : POSITIVE
-      : (siblingIndex === INFINITY)
-        ? NEGATIVE
-        : currentIndex - siblingIndex
+        ? (siblingIndex === INFINITY)
+            ? NEGATIVE
+            : POSITIVE
+        : (siblingIndex === INFINITY)
+            ? NEGATIVE
+            : currentIndex - siblingIndex
     : (currentIndex === INFINITY)
-      ? POSITIVE
-      : (siblingIndex === INFINITY)
-        ? NEGATIVE
-        : currentIndex - siblingIndex
+        ? POSITIVE
+        : (siblingIndex === INFINITY)
+            ? NEGATIVE
+            : currentIndex - siblingIndex
 )
 
 export function reduce (array, { delta }, i, a) {
