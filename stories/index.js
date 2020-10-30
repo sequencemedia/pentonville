@@ -90,9 +90,9 @@ storiesOf('Pentonville', module)
 
           <p>
             Lorem ipsum <a onClick={(e) => {
-              e.preventDefault()
-              onClick(e)
-            }} href="http://news.bbc.co.uk">dolor sit amet</a>, consectetur adipiscing elit. Nam mattis imperdiet eros, non vulputate lectus elementum quis. Sed vitae enim nec nisi cursus egestas. Duis venenatis vulputate arcu, ut blandit elit efficitur ut. Proin in condimentum felis. Cras id elit a nisl tincidunt congue id sed elit. Sed nec lacinia tortor. Fusce consequat ligula dolor. Pellentesque nunc nulla, iaculis vel nibh ut, gravida efficitur erat. Aenean iaculis ac diam vitae elementum. Suspendisse eu maximus massa. Cras ac dui consequat eros pharetra lacinia eu vitae tortor. Curabitur eu semper turpis, eget tincidunt enim.
+            e.preventDefault()
+            onClick(e)
+          }} href="http://news.bbc.co.uk">dolor sit amet</a>, consectetur adipiscing elit. Nam mattis imperdiet eros, non vulputate lectus elementum quis. Sed vitae enim nec nisi cursus egestas. Duis venenatis vulputate arcu, ut blandit elit efficitur ut. Proin in condimentum felis. Cras id elit a nisl tincidunt congue id sed elit. Sed nec lacinia tortor. Fusce consequat ligula dolor. Pellentesque nunc nulla, iaculis vel nibh ut, gravida efficitur erat. Aenean iaculis ac diam vitae elementum. Suspendisse eu maximus massa. Cras ac dui consequat eros pharetra lacinia eu vitae tortor. Curabitur eu semper turpis, eget tincidunt enim.
           </p>
 
           <label>
@@ -114,9 +114,9 @@ storiesOf('Pentonville', module)
 
         <p tabIndex='7'>
           Lorem ipsum <a onClick={(e) => {
-            e.preventDefault()
-            onClick(e)
-          }} href="http://news.bbc.co.uk">dolor sit amet</a>, consectetur adipiscing elit. Nam mattis imperdiet eros, non vulputate lectus elementum quis. Sed vitae enim nec nisi cursus egestas. Duis venenatis vulputate arcu, ut blandit elit efficitur ut. Proin in condimentum felis. Cras id elit a nisl tincidunt congue id sed elit. Sed nec lacinia tortor. Fusce consequat ligula dolor. Pellentesque nunc nulla, iaculis vel nibh ut, gravida efficitur erat. Aenean iaculis ac diam vitae elementum. Suspendisse eu maximus massa. Cras ac dui consequat eros pharetra lacinia eu vitae tortor. Curabitur eu semper turpis, eget tincidunt enim.
+          e.preventDefault()
+          onClick(e)
+        }} href="http://news.bbc.co.uk">dolor sit amet</a>, consectetur adipiscing elit. Nam mattis imperdiet eros, non vulputate lectus elementum quis. Sed vitae enim nec nisi cursus egestas. Duis venenatis vulputate arcu, ut blandit elit efficitur ut. Proin in condimentum felis. Cras id elit a nisl tincidunt congue id sed elit. Sed nec lacinia tortor. Fusce consequat ligula dolor. Pellentesque nunc nulla, iaculis vel nibh ut, gravida efficitur erat. Aenean iaculis ac diam vitae elementum. Suspendisse eu maximus massa. Cras ac dui consequat eros pharetra lacinia eu vitae tortor. Curabitur eu semper turpis, eget tincidunt enim.
         </p>
 
         <p tabIndex='5'>
