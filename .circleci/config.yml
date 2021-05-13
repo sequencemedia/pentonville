@@ -50,7 +50,9 @@ workflows:
   version: 2
   commit-workflow:
     jobs:
-      - publish:
+      - lint:
           filters:
+            branches:
+              only: master
             tags:
               only: /^v.*/
