@@ -50,7 +50,7 @@ workflows:
   version: 2
   commit-workflow:
     jobs:
-      - lint:
+      - publish:
           filters:
             branches:
               only: master
