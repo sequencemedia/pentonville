@@ -1,6 +1,6 @@
 {
   "name": "pentonville",
-  "version": "1.0.177",
+  "version": "1.0.178",
   "description": "Pentonville",
   "keywords": [
     "Pentonville",
@@ -40,7 +40,7 @@
     "@babel/preset-react": "^7.16.7",
     "@babel/register": "^7.17.7",
     "babel-plugin-module-resolver": "^4.1.0",
-    "core-js": "^3.21.1",
+    "core-js": "^3.22.0",
     "eslint": "^8.13.0",
     "eslint-config-standard": "^17.0.0-1",
     "eslint-import-resolver-babel-module": "^5.3.1",
