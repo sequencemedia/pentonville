@@ -29,7 +29,8 @@
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
     "gulp": "gulp --color",
-    "pre-commit": "npm run lint && npm run build && git add lib && npm run gulp -- pre-commit"
+    "pre-commit": "npm run lint && npm run build && git add lib && npm run gulp -- pre-commit",
+    "prepare": "husky install"
   },
   "devDependencies": {
     "@babel/cli": "^7.19.3",
