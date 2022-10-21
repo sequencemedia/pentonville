@@ -24,3 +24,5 @@
 # Storybook
 .storybook
 stories
+
+gulpfile.*
