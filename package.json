@@ -1,6 +1,6 @@
 {
   "name": "pentonville",
-  "version": "1.0.294",
+  "version": "1.0.295",
   "description": "Pentonville",
   "keywords": [
     "Pentonville",
@@ -50,7 +50,7 @@
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.31.10",
     "gulp": "^4.0.2",
-    "husky": "^8.0.1",
+    "husky": "^8.0.2",
     "prop-types": "15.7.2",
     "react": "16.14.0",
     "react-dom": "16.14.0"
