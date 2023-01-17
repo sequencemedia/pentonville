@@ -1,6 +1,6 @@
 {
   "name": "pentonville",
-  "version": "1.0.329",
+  "version": "1.0.330",
   "description": "Pentonville",
   "keywords": [
     "Pentonville",
@@ -44,11 +44,11 @@
     "core-js": "^3.27.1",
     "eslint": "^8.32.0",
     "eslint-config-standard": "^17.0.0",
-    "eslint-import-resolver-babel-module": "^5.3.1",
-    "eslint-plugin-import": "^2.27.4",
+    "eslint-import-resolver-babel-module": "^5.3.2",
+    "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-react": "^7.32.0",
+    "eslint-plugin-react": "^7.32.1",
     "gulp": "^4.0.2",
     "husky": "^8.0.3",
     "prop-types": "15.7.2",
