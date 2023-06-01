@@ -5,12 +5,11 @@
     "plugin:react/recommended"
   ],
   "env": {
-    "browser": true,
-    "es6": true
+    "browser": true
   },
   "parser": "@babel/eslint-parser",
   "parserOptions": {
-    "ecmaVersion": 2020,
+    "ecmaVersion": "latest",
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
