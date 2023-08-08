@@ -13,10 +13,14 @@
     "focus"
   ],
   "main": "./index.js",
-  "author": "Jonathan Perry for Sequence Media Limited <sequencemedia@sequencemedia.net>",
+  "author": {
+    "name": "Jonathan Perry for Sequence Media Limited",
+    "email": "sequencemedia@sequencemedia.net",
+    "url": "http://sequencemedia.net"
+  },
   "license": "MIT",
   "engines": {
-    "node": ">=16.13.0"
+    "node": ">=16.20.1"
   },
   "repository": {
     "type": "git",
@@ -31,11 +35,11 @@
     "prepare": "husky install"
   },
   "devDependencies": {
-    "@babel/cli": "^7.22.9",
-    "@babel/core": "^7.22.9",
-    "@babel/eslint-parser": "^7.22.9",
+    "@babel/cli": "^7.22.10",
+    "@babel/core": "^7.22.10",
+    "@babel/eslint-parser": "^7.22.10",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
-    "@babel/preset-env": "^7.22.9",
+    "@babel/preset-env": "^7.22.10",
     "@babel/preset-react": "^7.22.5",
     "@babel/register": "^7.22.5",
     "@sequencemedia/hooks": "^1.0.444",
