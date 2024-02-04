@@ -1,9 +1,8 @@
 module.exports = {
-  compact: true,
-  comments: false,
   presets: [
     [
-      '@babel/env', {
+      '@babel/env',
+      {
         targets: {
           node: 'current',
           browsers: [
@@ -17,12 +16,6 @@ module.exports = {
     '@babel/react'
   ],
   plugins: [
-    [
-      '@babel/proposal-class-properties',
-      {
-        loose: false
-      }
-    ],
     [
       'module-resolver', {
         alias: {
