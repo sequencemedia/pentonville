@@ -29,10 +29,10 @@
   "scripts": {
     "build": "babel src -d lib",
     "build:watch": "babel src -d lib -w",
-    "prepublishOnly": "npm run build",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
-    "prepare": "husky"
+    "prepare": "husky",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@babel/cli": "^7.24.6",
