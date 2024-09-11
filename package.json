@@ -41,7 +41,7 @@
     "@babel/preset-env": "^7.25.4",
     "@babel/preset-react": "^7.24.7",
     "@babel/register": "^7.24.6",
-    "@sequencemedia/hooks": "^1.0.551",
+    "@sequencemedia/hooks": "^1.0.552",
     "babel-plugin-module-resolver": "^5.0.2",
     "core-js": "^3.38.1",
     "eslint": "8.57.0",
