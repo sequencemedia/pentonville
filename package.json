@@ -34,6 +34,10 @@
     "prepare": "node husky.mjs",
     "prepublishOnly": "npm run build"
   },
+  "allowScripts": {
+    "core-js@3.51.0": true,
+    "fsevents@2.3.3": true
+  },
   "devDependencies": {
     "@babel/cli": "7.29.7",
     "@babel/core": "7.29.7",
@@ -51,9 +55,5 @@
     "prop-types": "15.7.2",
     "react": "16.14.0",
     "react-dom": "16.14.0"
-  },
-  "allowScripts": {
-    "core-js@3.51.0": true,
-    "fsevents@2.3.3": true
   }
 }
